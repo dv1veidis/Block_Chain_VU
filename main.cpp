@@ -1,6 +1,7 @@
 #include "My_lib.h"
+#include "hashing.cpp"
 
-void input (vector<string> &ivestis){
+void input (vector<string> &ivestis, vector<string> &hash){
 cout<<"Ar norite duomenis ivesti is failo ar ranka?(f-failo/r-rankos)"<<endl;
 string input;
 cin>>input;
@@ -27,6 +28,8 @@ if(input =="f" || input=="F"){
     openf.close();
     getline(buffer, eil);
     ivestis.push_back(eil);
+    hash.push_back(hashavimas(eil));
+    
     while (getline(buffer, eil)){
         ivestis.push_back(eil);
     }
@@ -40,23 +43,25 @@ else {
     cin.ignore();
     getline(cin, naudIvestis);
     ivestis.push_back(naudIvestis);
-    cout<<"Ar dar norite ivesti kazka naujo?(Iveskite T/t jei taip, ir N/n jei ne)"<<endl;
+    hash.push_back(hashavimas(naudIvestis));
+    cout<<"Ar dar norite ivesti kazka naujo?(Iveskite T/t jei taip, ir bet ka jei nenorite)"<<endl;
     cin>>pasirinkimas;
     }
 }
 }
 
-void output(vector<string> ivestis){
+void output(vector<string> ivestis, vector<string> hash){
 for(int i=0; i<ivestis.size(); i++){
-    cout<<ivestis[i]<<endl;
+    cout<<ivestis[i]<<" "<<hash[i]<<endl;
 }
 }
 
 
 int main(){
     vector<string> ivestis;
-    input(ivestis);
-    output(ivestis);
+    vector<string> hash;
+    input(ivestis, hash);
+    output(ivestis, hash);
 
     return 0;
 }
