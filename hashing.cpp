@@ -3,17 +3,31 @@
 
 string hashavimas (string input){
     string hash = "";
-    int salt = 2048; // reiksme kuri leidzia net tusciam input buti hashuojamam ir padidina atsistiktinuma
-    unsigned int combination =0; // unsigned int, kad int negaletu buti neigiamas
+    int salt = 512; // reiksme kuri leidzia net tusciam input buti hashuojamam ir padidina atsistiktinuma
+    unsigned int combination =salt*2; // unsigned int, kad int negaletu buti neigiamas
     unsigned int ascii;
+    unsigned int random=2;
     for(int i=0; i<input.size(); i++){
         ascii=input[i];
-        combination += (ascii * salt) + i*salt; 
+        combination = (combination << 2)-ascii-i +salt;
+        random=(random<<3) - i*ascii;
+        
     }
-    string pattern = "0a1b2c3d4e5F6f7g8h9ijklmnopqrstuvwxyz";
+    //cout<<random<<endl; 
+    //cout<<combination<<endl;
+    string pattern = "0123456789abcdef"; // pattern for a hexadecimal system
+    unsigned int naudojamas;
+    if(random>combination){
+        naudojamas = random-combination;
+    }
+    else{
+        naudojamas = combination-random;
+    }
 
-    for(int i=0; i<64; i++){
-        hash+=pattern[(combination-i)%pattern.size()];
+    for(int i=0; i<64; i++){  
+        naudojamas += combination *i + random/naudojamas + (naudojamas>>i);
+        hash+=pattern[naudojamas%pattern.size()];
+        //cout<<randInt<<endl;
     }
     return hash;
 }
