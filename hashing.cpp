@@ -9,12 +9,11 @@ string hashavimas (string input){
     unsigned int random=2;
     for(int i=0; i<input.size(); i++){
         ascii=input[i];
-        combination = (combination << 2)-ascii-i +salt;
+        combination = (combination << 2)-ascii-i-combination +salt;
         random=(random<<3) - i*ascii;
         
     }
-    //cout<<random<<endl; 
-    //cout<<combination<<endl;
+
     string pattern = "0123456789abcdef"; // pattern for a hexadecimal system
     unsigned int naudojamas;
     if(random>combination){
