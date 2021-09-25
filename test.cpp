@@ -1,5 +1,8 @@
 #include "My_lib.h"
 #include "hashing.cpp"
+#include "./sha256/sha256.h"
+
+
 
 void testInput(vector<string> &ivestis, vector<string> &ivestis2, vector<string> &hash, vector<string> &hash2, int a){
 string eil;
@@ -118,6 +121,46 @@ else if (a==4){
         cout<<"TestA_B - "<<hash2[0]<<endl;
     }
 }
+else if (a == 5){
+    int b = 0;
+    double fullTimeHash = 0;
+    double fullTimeSHA = 0;
+    ifstream openf("./Test/konstitucija.txt");
+    openf.open("./Test/konstitucija.txt");
+    buffer<<openf.rdbuf();
+    openf.close();
+    getline(buffer, eil);
+    ivestis.push_back(eil);
+    while (getline(buffer, eil)){
+        ivestis.push_back(eil);
+    }
+    while (b!= 5000){
+    auto start_time = std::chrono::high_resolution_clock::now();
+    for (int i=0; i<ivestis.size(); i++){
+        hash.push_back(hashavimas(ivestis[i]));
+    }
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto time = end_time-start_time;
+    auto start_time2=std::chrono::high_resolution_clock::now();
+    //cout<<"Mano hash laikas "<<(double)(time/std::chrono::microseconds(5))/1000<<" ms" <<endl;
+    for (int i=0; i<ivestis.size(); i++){
+        hash2.push_back(sha256(ivestis[i]));
+    }
+    auto second_end = std::chrono::high_resolution_clock::now();
+    auto sha256_time = second_end - start_time2;
+    //cout<<"SHA-256 laikas "<< (double)(sha256_time/std::chrono::microseconds(5))/1000<<" ms"<<endl;
+    
+    fullTimeHash +=(double)(time/std::chrono::microseconds(5))/1000;
+    fullTimeSHA += (double)(sha256_time/std::chrono::microseconds(5))/1000;
+    b++;
+    hash.clear();
+    hash2.clear();
+    }
+    fullTimeHash = fullTimeHash/5000;
+    fullTimeSHA = fullTimeSHA/5000;
+   cout<<"Average time for my hash = "<<fixed<<setprecision(3)<<fullTimeHash<<" ms"<<endl;
+   cout<<"Average time for my SHA-256 = "<<fixed<<setprecision(3)<<fullTimeSHA<<" ms"<<endl;
+}
 
 }
 
@@ -126,11 +169,12 @@ void testai (vector<string> &ivestis, vector<string> &ivestis2, vector<string> &
     <<"1 - dvieju simboliu hash playginimas\n"
     <<"2 - tuscio failo hashavimas\n"
     <<"3 - >1000 simboliu failu hashavimas\n"
-    <<"4 - >1000 simboliu failu, skirianciu tik vienu simboliu, hashavimo palyginimas"<<endl;
+    <<"4 - >1000 simboliu failu, skirianciu tik vienu simboliu, hashavimo palyginimas\n"
+    <<"5 - konstitucija.txt failo hashavimo laiko matavimas palyginant su SHA-256"<<endl;
     cout<<"Jusu ivestis : ";
     int pasirinkimas;
     cin>>pasirinkimas;
-    while(pasirinkimas>4 || pasirinkimas<1){
+    while(pasirinkimas>5 || pasirinkimas<1){
         cin.clear();
         cin.ignore();
         cout<<"Blogas ivestis. Prasome ivesti is naujo!"<<endl;

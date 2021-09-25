@@ -19,6 +19,11 @@ VU Block Chain technologiju laboratorinis darbas
   1. Implementuota testavimo funkcija
   2. Kelete bug fix
 
+# Version 0.05
+
+  1. Implementuotas konstitucija.txt failo eilučių hashavimo greičio spartos matavimas
+  2. Idėtas SHA-256 algoritmas palyginimui su mano sukurtu hash funkcijos algoritmu
+
 # Testavimas
 
   ## Vieno simbolio failų hash skirtumas
@@ -49,4 +54,13 @@ VU Block Chain technologiju laboratorinis darbas
   Hash skirtingas
   TestA_A - fd3eecafa8300c47ae919c3996f4a4fc89e20d005d2b7662afbf68c27de96e96
   TestA_B - d798b24978ae14db83fe1457dd697ca024ae3af0ef49e7e346344c6a83194a7e
+  ```
+
+  ## Konstitucija.txt failo spartos matavimai su mano hash algoritmu ir su SHA-256
+  ## Tyrimas atliktas su AMD RYZEN 4500u tyrimo vidurkis yra surinktas per 5000 hashavimo kartojimų
+
+  ### Pavyzdys
+  ```
+  Average time for my hash = 0.221 ms
+  Average time for my SHA-256 = 0.433 ms
   ```
