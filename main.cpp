@@ -1,6 +1,9 @@
 #include "My_lib.h"
 #include "test.cpp"
 #include "input.cpp"
+#include "./sha256/sha256.h"
+#include "./sha256/sha256.cpp"
+
 
 int main(){
     vector<string> ivestis;
