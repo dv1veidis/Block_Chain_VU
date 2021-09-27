@@ -24,6 +24,8 @@
 #include <map>
 #include <locale>
 #include <regex>
+#include <time.h>
+#include <bitset>
 
 
 
@@ -55,6 +57,7 @@ using std::equal;
 using std::remove_if;
 using std::locale;
 using std::regex;
+using std::bitset;
 
 
 

@@ -16,7 +16,7 @@ if(input =="f" || input=="F"){
     string failas;
     cout<<"Iveskite tik failo pavadinima"<<endl;
     cin>>failas;
-    ifstream openf(failas);
+    ifstream openf(failas+".txt");
     stringstream buffer;
     openf.open(failas+".txt");
     while(!openf){
