@@ -24,6 +24,11 @@ VU Block Chain technologiju laboratorinis darbas
   1. Implementuotas konstitucija.txt failo eilučių hashavimo greičio spartos matavimas
   2. Idėtas SHA-256 algoritmas palyginimui su mano sukurtu hash funkcijos algoritmu
 
+# Version 0.1
+
+  1. Implementuotas porų generavimo algoritmas
+  2. Implementuotas bitu ir hexu lygmens skirtumo patikrinimas
+
 # Testavimas
 
   ## Vieno simbolio failų hash skirtumas
@@ -64,3 +69,29 @@ VU Block Chain technologiju laboratorinis darbas
   Average time for my hash = 0.221 ms
   Average time for my SHA-256 = 0.433 ms
   ```
+
+  ## Porų kolizijos rezultai 100000 porų
+  ```
+  Ar norite generuoti naujas poras?(t/T - taip, n/N - ne)
+  t
+  Kolizija neaptikta
+  ```
+
+  ## Porų tesiskiriančių vienu simbolių hashavimo skirtumo rezultatai
+  ```
+  Kolizija neaptikta
+                                 Hex  Bit
+  Minimalio skirtingumo reiksmes: 50  118
+  Maksimalios skirtingumo reiksmes: 64  214
+  Hexadecimal difference achieved: 93.27 %
+  Bit difference achieved: 32.55 %
+  ```
+
+# Išvada
+
+  1. Maišos algoritmas atitinka visus reikalavimus. Tai matome iš skirtingų bandymų atliktų aukščiau.
+  2. Maišos algoritmas garantuoja 64 simbolių išvesti.
+  3. Maišos funkcija determininstinė tai reiškia, jog įvedus tą patį tekstą gaunamas ta pati maiša.
+  4. Maišos funkcija atitinka lavinos efektą, kurį testavome pirmajame bandyme.
+  5. Maišos funkcija efektyvi ir greičiu aplenkia testuotos SHA-256 funkcijos veikimo greitį.
+  6. Maišos funkcija atspari kolizijai testuojant su 100000 porų. 
